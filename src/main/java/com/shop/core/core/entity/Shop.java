@@ -20,7 +20,7 @@ public class Shop {
 
     @Column (name = "products")
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "product_shop",
+    @JoinTable(name = "shop_warehouse",
             joinColumns = @JoinColumn(name = "shop_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;

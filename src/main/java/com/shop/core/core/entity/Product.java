@@ -20,13 +20,20 @@ public class Product {
     @Column(name = "product_price", nullable = false)
     private BigDecimal productPrice;
 
-    @Column(name= "shop_warehouse")
-    @ManyToMany
-    @JoinTable(name = "product_shop",
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "shop_warehouse",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "shop_id")
     )
     private List<Shop>  shopWarehouse;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "customer_cart",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "cart_id")
+    )
+    private List<Cart> carts;
+
 
     public Product() {
     }
