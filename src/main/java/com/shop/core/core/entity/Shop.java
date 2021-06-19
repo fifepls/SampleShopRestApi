@@ -14,7 +14,6 @@ public class Shop {
     private String address;
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
-
     private List<Employee> shopEmployees;
 
 
