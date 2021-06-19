@@ -3,6 +3,7 @@ package com.shop.core.core.entity;
 import javax.persistence.*;
 import java.util.Objects;
 
+//customer
 @Entity
 public class Customer {
     @Id
