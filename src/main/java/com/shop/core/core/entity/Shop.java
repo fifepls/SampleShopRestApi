@@ -2,6 +2,7 @@ package com.shop.core.core.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Shop {
@@ -58,5 +59,18 @@ public class Shop {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shop shop = (Shop) o;
+        return Objects.equals(id, shop.id) && Objects.equals(address, shop.address) && Objects.equals(shopEmployees, shop.shopEmployees) && Objects.equals(products, shop.products);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, address, shopEmployees, products);
     }
 }

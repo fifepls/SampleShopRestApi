@@ -2,6 +2,7 @@ package com.shop.core.core.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 public class Employee {
@@ -74,5 +75,18 @@ public class Employee {
 
     public void setShop(Shop shop) {
         this.shop = shop;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(id, employee.id) && Objects.equals(name, employee.name) && Objects.equals(lastName, employee.lastName) && Objects.equals(phoneNumber, employee.phoneNumber) && Objects.equals(hourlyPayment, employee.hourlyPayment) && Objects.equals(shop, employee.shop);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, lastName, phoneNumber, hourlyPayment, shop);
     }
 }
