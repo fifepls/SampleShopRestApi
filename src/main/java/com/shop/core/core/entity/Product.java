@@ -83,11 +83,11 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(productName, product.productName) && Objects.equals(productDescription, product.productDescription) && Objects.equals(productPrice, product.productPrice) && Objects.equals(shopWarehouse, product.shopWarehouse);
+        return id.equals(product.id) && Objects.equals(productName, product.productName) && Objects.equals(productDescription, product.productDescription) && Objects.equals(productPrice, product.productPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, productName, productDescription, productPrice, shopWarehouse);
+        return Objects.hash(id, productName, productDescription, productPrice);
     }
 }

@@ -66,7 +66,7 @@ public class Shop {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Shop shop = (Shop) o;
-        return Objects.equals(id, shop.id) && Objects.equals(address, shop.address) && Objects.equals(shopEmployees, shop.shopEmployees) && Objects.equals(products, shop.products);
+        return id.equals(shop.id) && address.equals(shop.address) && shopEmployees.equals(shop.shopEmployees) && products.equals(shop.products);
     }
 
     @Override

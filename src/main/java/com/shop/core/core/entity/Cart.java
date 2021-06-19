@@ -2,6 +2,7 @@ package com.shop.core.core.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Cart {
@@ -43,5 +44,18 @@ public class Cart {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cart cart = (Cart) o;
+        return id.equals(cart.id) && customer.equals(cart.customer) && products.equals(cart.products);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, customer, products);
     }
 }
