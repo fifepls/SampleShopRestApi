@@ -9,5 +9,4 @@ public interface EmployeeService {
     public Boolean removeEmployee(Long employeeId);
     public List<Employee> getAllEmployees();
     public Employee updateEmployee(Employee updatedEmployee);
-
 }

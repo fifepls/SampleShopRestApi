@@ -9,6 +9,4 @@ public interface CustomerService {
     public Boolean customerChangePhone(String customerPhone, String customerPassword, String customerNewPhone);
     public Boolean customerAddProductToCart(Long customerId, Long productId);
     public Boolean customerRemoveProductFormCart(Long customerId, Long productId);
-
-
 }
