@@ -35,6 +35,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             if(newEmployee == null){
                 throw new EmployeeNotAddedException("newEmployee is null");
             }
+
+            if(employeePhoneAlreadyBusy(newEmployee)){
+                throw new EmployeeNotAddedException("phone is already busy");
+            }
+
             Optional<Shop> optionalShop = shopRepository.findById(shopId);
                 if(optionalShop.isPresent()) {
                     newEmployee.setShop(optionalShop.get());
@@ -44,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 }
         }catch (EmployeeNotAddedException e){
             logger.error("employee not added",e);
-            throw new EmployeeNotAddedException("newEmployee is null",e);
+            throw new EmployeeNotAddedException("employee not added",e);
         }
     }
 
@@ -79,5 +84,16 @@ public class EmployeeServiceImpl implements EmployeeService {
             logger.error("updated employee is null",e);
             throw new EmployeeNotUpdatedException("updated employee is null",e);
         }
+    }
+
+
+    private Boolean employeePhoneAlreadyBusy(Employee employee){
+        if(employee == null){
+            return true; //if null, then return already contains
+        }
+        Optional<Employee> optionalEmployee = employeeRepository.findEmployeeByPhoneNumber(employee.getPhoneNumber());
+
+        //means employee phone is free
+        return optionalEmployee.isPresent(); //if optional employee is present, then phone is busy, else is free
     }
 }
