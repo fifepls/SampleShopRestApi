@@ -12,8 +12,8 @@ import com.shop.core.core.service.exception.product.ProductNotCreatedException;
 import com.shop.core.core.service.exception.product.ProductNotDeletedException;
 import com.shop.core.core.service.exception.shop.ShopNotAddedException;
 import com.shop.core.core.service.exception.shop.ShopNotRemovedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -30,6 +30,8 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+
+    @PreAuthorize("hasAuthority('employee:newProduct')")
     @PostMapping("/add/product")
     public boolean addProduct(@RequestBody Product product) {
         try {
@@ -40,6 +42,8 @@ public class EmployeeController {
         }
     }
 
+
+    @PreAuthorize("hasAuthority('employee:remProduct')")
     @DeleteMapping("/rem/product")
     public boolean removeProduct(@RequestParam(value ="productId") Long productId){
         try {
@@ -49,6 +53,8 @@ public class EmployeeController {
         }
     }
 
+
+    @PreAuthorize("hasAuthority('employee:newShop')")
     @PostMapping("/add/shop")
     public boolean addShop (Shop newShop){
         try {
@@ -59,6 +65,8 @@ public class EmployeeController {
         }
     }
 
+
+    @PreAuthorize("hasAuthority('employee:remShop')")
     @DeleteMapping("/rem/shop")
     public boolean removeShop (@RequestParam(value = "shopId") Long shopId){
         try {
@@ -69,6 +77,7 @@ public class EmployeeController {
     }
 
 
+    @PreAuthorize("hasAuthority('employee:regEmployee')")
     @PostMapping("/reg/employee")
     public boolean regNewEmployee(@RequestBody Employee employee, @RequestParam(value = "shopId")Long shopId){
         try {
@@ -79,6 +88,8 @@ public class EmployeeController {
         }
     }
 
+
+    @PreAuthorize("hasAuthority('employee:remEmployee')")
     @DeleteMapping("/rem/employee")
     public boolean remEmployee(@RequestParam(value = "employeeId")Long employeeId){
         try {
@@ -88,8 +99,15 @@ public class EmployeeController {
         }
     }
 
+
+    @PreAuthorize("hasAuthority('employee:getEmployees')")
     @GetMapping("/get/allEmployee")
-    public List<Employee> getAllEmployeesХ(){
+    public List<Employee> getAllEmployees(){
         return employeeService.getAllEmployees();
+    }
+
+    @GetMapping("/get/allShops")
+    public List<Shop> getShops(){
+        return shopService.getAllShops();
     }
 }

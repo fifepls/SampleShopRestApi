@@ -19,12 +19,19 @@ public class Employee {
     @Column(name = "employee_phone_number",nullable = false, unique = true)
     private String phoneNumber;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
     @Column(name = "employee_hourly_payment", nullable = false)
     private BigDecimal hourlyPayment;
 
     @ManyToOne
     @JoinColumn(name = "shop_id")
     private Shop shop;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
 
     public Employee() {
     }
@@ -88,5 +95,21 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, lastName, phoneNumber, hourlyPayment, shop);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

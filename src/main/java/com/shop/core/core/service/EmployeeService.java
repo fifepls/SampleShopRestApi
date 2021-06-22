@@ -4,7 +4,6 @@ import com.shop.core.core.entity.Employee;
 import com.shop.core.core.service.exception.employee.EmployeeNotAddedException;
 import com.shop.core.core.service.exception.employee.EmployeeNotRemovedException;
 import com.shop.core.core.service.exception.employee.EmployeeNotUpdatedException;
-
 import java.util.List;
 
 public interface EmployeeService {
