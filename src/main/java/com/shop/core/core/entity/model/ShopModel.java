@@ -1,7 +1,6 @@
 package com.shop.core.core.entity.model;
 
 import com.shop.core.core.entity.Shop;
-
 import java.util.ArrayList;
 import java.util.List;
 
