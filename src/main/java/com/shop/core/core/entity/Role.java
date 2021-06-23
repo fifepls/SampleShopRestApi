@@ -12,8 +12,15 @@ public enum Role {
             Permission.EMPLOYEE_REG_NEW_EMPLOYEE,
             Permission.EMPLOYEE_REM_EMPLOYEE,
             Permission.EMPLOYEE_GET_ALL_EMPLOYEES
-            )
-    );
+            )),
+
+    CUSTOMER(Set.of(Permission.CUSTOMER_UPDATE_PHONE,
+            Permission.CUSTOMER_UPDATE_PASSWORD,
+            Permission.CUSTOMER_ADD_PRODUCT_TO_CART,
+            Permission.CUSTOMER_REM_PRODUCT_FROM_CART,
+            Permission.CUSTOMER_GET_PRODUCTS_FROM_CART
+            ))
+    ;
 
     Role(Set<Permission> permissions) {
         this.permissions = permissions;

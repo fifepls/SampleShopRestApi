@@ -1,12 +1,13 @@
 package com.shop.core.core.controller;
 
 import com.shop.core.core.entity.Product;
-import com.shop.core.core.entity.Shop;
+import com.shop.core.core.entity.model.ShopModel;
 import com.shop.core.core.service.CartService;
 import com.shop.core.core.service.CustomerService;
 import com.shop.core.core.service.ProductService;
 import com.shop.core.core.service.ShopService;
 import com.shop.core.core.service.exception.customer.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -27,6 +28,7 @@ public class CustomerController {
         this.cartService = cartService;
     }
 
+
     @GetMapping("/get/allProducts")
     public List<Product> getProducts(){
         return productService.getAllProducts();
@@ -34,10 +36,12 @@ public class CustomerController {
 
 
     @GetMapping("/get/allShops")
-    public List<Shop> getShops(){
-        return shopService.getAllShops();
+    public List<ShopModel> getShops(){
+        return ShopModel.shopListToModel(shopService.getAllShops());
     }
 
+
+    @PreAuthorize("hasAuthority('customer:addProductToCart')")
     @PostMapping("/add/product/toCart/")
     public boolean addProductToCart(@RequestParam(value = "CustomerId") Long customerId,
                                     @RequestParam(value = "ProductId") Long productId){
@@ -50,6 +54,7 @@ public class CustomerController {
     }
 
 
+    @PreAuthorize("hasAuthority('customer:remProductFromCart')")
     @DeleteMapping("/rem/product/fromCart/")
     public boolean remProductToCart(@RequestParam(value = "CustomerId") Long customerId,
                                     @RequestParam(value = "ProductId") Long productId){
@@ -61,6 +66,8 @@ public class CustomerController {
         }
     }
 
+
+    @PreAuthorize("hasAuthority('customer:updatePassword')")
     public Boolean customerUpdatePassword(@RequestParam(value = "customerPhone")String customerPhone,
                                           @RequestParam(value = "customerOldPassword") String customerOldPassword,
                                           @RequestParam(value = "customerNewPassword")String customerNewPassword){
@@ -71,6 +78,8 @@ public class CustomerController {
         }
 
     }
+
+    @PreAuthorize("hasAuthority('customer:updatePhone')")
     public Boolean customerUpdatePhone(@RequestParam(value = "customerPhone") String customerPhone,
                                        @RequestParam(value = "customerPassword") String customerPassword,
                                        @RequestParam(value = "customerNewPhone") String customerNewPhone){
@@ -81,6 +90,8 @@ public class CustomerController {
         }
     }
 
+
+    @PreAuthorize("hasAuthority('customer:getProductsFromCart')")
     public List<Product> getProductsFromCartByCustomerId(@RequestParam(value = "customerId") Long customerId){
         try {
             return cartService.getProductsFromCartByCustomerId(customerId);
