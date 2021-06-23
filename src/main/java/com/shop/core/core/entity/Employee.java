@@ -1,5 +1,6 @@
 package com.shop.core.core.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -27,6 +28,7 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name = "shop_id")
+    @JsonBackReference
     private Shop shop;
 
     @Enumerated(value = EnumType.STRING)
